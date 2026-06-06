@@ -53,6 +53,11 @@
                         </div>
                     </div>
                 </div>
+                <!-- Settings Button -->
+                <button class="settings-btn" id="settings-btn" onclick="showSettingsModal()" title="AI API Settings">
+                    <span class="settings-icon">⚙️</span>
+                    <span class="settings-badge" id="ai-status-badge">AI Off</span>
+                </button>
                 <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle menu">
                     <span></span><span></span><span></span>
                 </button>
@@ -86,7 +91,7 @@
                 </div>
 
                 <div class="trust-indicators">
-                    <div class="indicator-item">✓ 13 Indian Languages</div>
+                    <div class="indicator-item">✓ English & Hindi</div>
                     <div class="indicator-item">✓ Northeast Specialization</div>
                     <div class="indicator-item">✓ Govt Schemes Discovery</div>
                     <div class="indicator-item">✓ Legal Escalation Paths</div>
@@ -661,6 +666,33 @@
             </div>
         </div>
     </footer>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-modal-content">
+            <div class="settings-modal-header">
+                <h3 data-i18n="settings_title">⚙️ AI Settings</h3>
+                <button class="close-modal-btn" onclick="hideSettingsModal()">✕</button>
+            </div>
+            <p class="settings-modal-desc" data-i18n="settings_desc">Haqqdar uses Google Gemini AI to analyze your problems, identify legal rights, and generate tailored legal documents.</p>
+            
+            <div class="settings-status-box">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="status-text">Checking status...</span>
+            </div>
+
+            <div class="settings-input-group">
+                <label for="api-key-input" data-i18n="settings_key_label">Gemini API Key</label>
+                <input type="password" id="api-key-input" placeholder="Enter your Gemini API Key here...">
+                <p class="settings-help-text" data-i18n="settings_help_text">Don't have a key? <a href="https://aistudio.google.com/" target="_blank">Get a free Gemini API Key here ↗</a></p>
+            </div>
+
+            <div class="settings-modal-actions">
+                <button class="btn-secondary" onclick="hideSettingsModal()" data-i18n="settings_cancel">Cancel</button>
+                <button class="btn-primary" onclick="saveSettings()" data-i18n="settings_save">Save Config</button>
+            </div>
+        </div>
+    </div>
 
     <script src="app.js"></script>
 </body>

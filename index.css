@@ -2284,3 +2284,277 @@ button {
         gap: 30px;
     }
 }
+
+/* ============================================
+   AI Settings & Modal Styles
+   ============================================ */
+
+.settings-btn {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: all var(--transition-normal);
+}
+
+.settings-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+}
+
+.settings-icon {
+    font-size: 1.25rem;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+}
+
+.settings-btn:hover .settings-icon {
+    transform: rotate(60deg);
+}
+
+.settings-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 20px;
+    border: 1.5px solid var(--bg-primary);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: all var(--transition-normal);
+}
+
+.settings-badge.active {
+    background: var(--green);
+}
+
+/* Modal Overlay */
+.settings-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(5, 5, 7, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity var(--transition-normal);
+}
+
+/* Modal Content Box */
+.settings-modal-content {
+    background: rgba(18, 18, 24, 0.95);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 480px;
+    padding: 32px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    transform: scale(0.95);
+    opacity: 0;
+    animation: modalScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.settings-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.settings-modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.close-modal-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.close-modal-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.settings-modal-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* Status Indicator Box */
+.settings-status-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.red {
+    background-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+}
+
+.status-dot.green {
+    background-color: var(--green);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+}
+
+#status-text {
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Input Styles */
+.settings-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.settings-input-group input {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all var(--transition-normal);
+}
+
+.settings-input-group input:focus {
+    outline: none;
+    border-color: var(--saffron);
+    box-shadow: 0 0 0 3px var(--saffron-glow);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.settings-help-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+.settings-help-text a {
+    color: var(--saffron);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.settings-help-text a:hover {
+    color: #ff8533;
+    text-decoration: underline;
+}
+
+/* Actions Buttons */
+.settings-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.settings-modal-actions button {
+    font-family: inherit;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.settings-modal-actions .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+.settings-modal-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+
+.settings-modal-actions .btn-primary {
+    background: linear-gradient(135deg, var(--saffron) 0%, #d95300 100%);
+    border: none;
+    color: #fff;
+    box-shadow: 0 4px 14px var(--saffron-glow);
+}
+
+.settings-modal-actions .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 110, 20, 0.3);
+}
+
+.settings-modal-actions .btn-primary:active {
+    transform: translateY(0);
+}

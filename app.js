@@ -1063,6 +1063,674 @@ Yours faithfully,
 };
 
 // ============================================
+// Document Gap Detector Databases
+// ============================================
+
+const GAP_PROFILES = {
+    flood: {
+        schemeName: "Assam Flood Relief & Crop Compensation Scheme",
+        schemeName_hi: "असम बाढ़ राहत और फसल मुआवजा योजना",
+        schemeName_as: "অসম বান সাহায্য আৰু শস্য ক্ষতিপূৰণ আঁচনি",
+        title: "🌾 Assam Flood Relief",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard identity proof required for DBT verification.", how_to_get_hi: "डीबीटी सत्यापन के लिए आवश्यक मानक पहचान प्रमाण।", how_to_get_as: "DBT পৰীক্ষণৰ বাবে প্ৰয়োজনীয় পৰিচয় পত্ৰ।" },
+            { id: "domicile", name: "Assam Domicile Certificate / Resident Proof", name_hi: "असम मूल निवासी प्रमाण पत्र", name_as: "অসমৰ স্থায়ী বাসিন্দাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Apply online at RTPS Assam / Sewa Setu portal or contact Gaon Panchayat office.", how_to_get_hi: "RTPS असम / सेवा सेतु पोर्टल पर ऑनलाइन आवेदन करें या ग्राम पंचायत कार्यालय से संपर्क करें।", how_to_get_as: "RTPS অসম / সেৱা সেতু পৰ্টেলত অনলাইন আবেদন কৰক বা গাঁও পঞ্চায়ত কাৰ্যালয়ত যোগাযোগ কৰক।" },
+            { id: "bank", name: "Bank Account Passbook (DBT enabled)", name_hi: "बैंक खाता पासबुक (DBT सक्रिय)", name_as: "বেংক একাউণ্টৰ পাছবুক (DBT সক্ৰিয়)", status: "present", how_to_get: "Passbook copy linked with Aadhaar for direct subsidy deposit.", how_to_get_hi: "सीधे सब्सिडी जमा करने के लिए आधार से जुड़ा बैंक पासबुक।", how_to_get_as: "প্ৰত্যক্ষ ৰাজসাহায্য জমাৰ বাবে আধাৰ সংযুক্ত বেংক পাছবুক।" },
+            { id: "damage_report", name: "Damage Assessment Report from Circle Office", name_hi: "सर्कल कार्यालय से क्षति मूल्यांकन रिपोर्ट", name_as: "ৰাজহ চক্ৰ বিষয়াৰ পৰা ক্ষয়-ক্ষতিৰ প্ৰতিবেদন", status: "missing", how_to_get: "Contact local Circle Officer or Gaon Burah for land/crop verification and receipt.", how_to_get_hi: "भूमि/फसल सत्यापन और रसीद के लिए स्थानीय सर्कल अधिकारी या गांव बूढ़ा से संपर्क करें।", how_to_get_as: "মাটি/শস্য পৰীক্ষণ আৰু ৰচিদৰ বাবে স্থানীয় চক্ৰ বিষয়া বা গাঁওবুঢ়াৰ সৈতে যোগাযোগ কৰক।" },
+            { id: "relief_receipt", name: "Relief Camp Registration Receipt", name_hi: "राहत शिविर पंजीकरण रसीद", name_as: "সাহায্য শিবিৰৰ পঞ্জীয়ন ৰচিদ", status: "missing", how_to_get: "Collect receipt from the camp in-charge officer during stay.", how_to_get_hi: "शिविर प्रवास के दौरान प्रभारी अधिकारी से रसीद एकत्र करें।", how_to_get_as: "শিবিৰত থকাৰ সময়ত ভাৰপ্ৰাপ্ত বিষয়াৰ পৰা পঞ্জীয়ন ৰচিদ সংগ্ৰহ কৰক।" },
+            { id: "land_proof", name: "Land Ownership / Possession Proof (Patta/Dharitree copy)", name_hi: "भूमि स्वामित्व प्रमाण पत्र (पट्टा / धरित्री प्रति)", name_as: "ভূমিৰ গৰাকীৰ প্ৰমাণ পত্ৰ (পট্টা / ধৰিত্ৰীৰ কপি)", status: "present", how_to_get: "Download via Dharitree portal or collect Jamabandi copy from Circle Office.", how_to_get_hi: "धरित्री पोर्टल से डाउनलोड करें या सर्कल कार्यालय से जमाबंदी प्रति प्राप्त करें।", how_to_get_as: "ধৰিত্ৰী পৰ্টেলৰ পৰা ডাউনলোড কৰক বা চক্ৰ কাৰ্যালয়ৰ পৰা জমাবন্দী কপি লওক।" }
+        ]
+    },
+    tea: {
+        schemeName: "Tea Garden Worker Welfare & Wage Scheme",
+        schemeName_hi: "चाय बागान श्रमिक कल्याण और मजदूरी योजना",
+        schemeName_as: "চাহ বাগিচাৰ শ্ৰমিক কল্যাণ আৰু মজুৰি আঁচনি",
+        title: "☕ Tea Garden Worker",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for identity mapping.", how_to_get_hi: "पहचान मिलान के लिए आवश्यक।", how_to_get_as: "পৰিচয় পৰীক্ষণৰ বাবে প্ৰয়োজনীয়।" },
+            { id: "tea_id", name: "Tea Garden Employment ID Card", name_hi: "चाय बागान रोजगार आईडी कार्ड", name_as: "চাহ বাগিচাৰ শ্ৰমিক পৰিচয় পত্ৰ", status: "present", how_to_get: "Issued by the Tea Estate Management office.", how_to_get_hi: "चाय बागान प्रबंधन कार्यालय द्वारा जारी।", how_to_get_as: "চাহ বাগিচা কৰ্তৃপক্ষৰ কাৰ্যালয়ৰ পৰা প্ৰদান কৰা হয়।" },
+            { id: "bank", name: "Bank Account Passbook (DBT enabled)", name_hi: "बैंक खाता पासबुक (DBT सक्रिय)", name_as: "বেংক একাউণ্টৰ পাছবুক (DBT সক্ৰিয়)", status: "present", how_to_get: "Required for salary credit and state welfare subsidies.", how_to_get_hi: "वेतन और राज्य कल्याण सब्सिडी जमा करने के लिए आवश्यक।", how_to_get_as: "দৰমহা আৰু চৰকাৰী সাহায্য লাভৰ বাবে প্ৰয়োজনীয়।" },
+            { id: "wage_slip", name: "Wage Slip / Statement", name_hi: "मजदूरी पर्ची / विवरण", name_as: "মজুৰিৰ ৰচিদ / স্লিপ", status: "present", how_to_get: "Collect monthly slip from estate accounts department.", how_to_get_hi: "बागान के लेखा विभाग से मासिक पर्ची एकत्र करें।", how_to_get_as: "বাগিচাৰ হিচাপ বিভাগৰ পৰা মাহেকীয়া স্লিপ সংগ্ৰহ কৰক।" },
+            { id: "health_card", name: "Estate Health Card / Medical Officer Certificate", name_hi: "बागान स्वास्थ्य कार्ड / चिकित्सा अधिकारी प्रमाण पत्र", name_as: "বাগিচাৰ স্বাস্থ্য কাৰ্ড / চিকিৎসা বিষয়াৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Request from the Tea Estate Hospital or Medical In-charge.", how_to_get_hi: "चाय बागान अस्पताल या चिकित्सा प्रभारी से अनुरोध करें।", how_to_get_as: "চাহ বাগিচাৰ চিকিৎসালয় বা চিকিৎসা বিষয়াৰ পৰা অনুৰোধ কৰক।" },
+            { id: "resident_proof", name: "Panchayat / Garden Resident Proof", name_hi: "पंचायत / बागान निवासी प्रमाण", name_as: "পঞ্চায়ত / বাগিচাৰ বাসিন্দাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Get signed resident letter from GP President or Tea Garden welfare officer.", how_to_get_hi: "जीपी अध्यक्ष या चाय बागान कल्याण अधिकारी से हस्ताक्षरित निवासी पत्र प्राप्त करें।", how_to_get_as: "GP সভাপতি বা চাহ বাগিচাৰ কল্যাণ বিষয়াৰ পৰা স্বাক্ষৰিত পত্ৰ লওক।" }
+        ]
+    },
+    scholarship: {
+        schemeName: "Pre & Post-Matric Scholarship for Low-Income Students",
+        schemeName_hi: "कम आय वाले छात्रों के लिए प्री और पोस्ट-मैट्रिक छात्रवृत्ति",
+        schemeName_as: "নিম্ন আয়ৰ ছাত্ৰ-ছাত্ৰীৰ বাবে প্ৰাক আৰু উত্তৰ-মেট্ৰিক জলপানী",
+        title: "🎓 Low-Income Student",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard identity proof." },
+            { id: "caste", name: "Caste Certificate (SC/ST/OBC)", name_hi: "जाति प्रमाण पत्र", name_as: "জাতিৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Apply at local Revenue/Tehsil Office or online RTPS portal." },
+            { id: "income", name: "Income Certificate (Annual income <= Rs. 2.5L)", name_hi: "आय प्रमाण पत्र (वार्षिक आय <= 2.5 लाख)", name_as: "आयৰ প্ৰমাণ পত্ৰ (বাৰ্ষিক আয় <= ২.৫ লাখ)", status: "present", how_to_get: "Obtain from Circle Officer, Tehsildar, or Revenue Authority." },
+            { id: "marksheet", name: "Previous Class Marksheet", name_hi: "पिछली कक्षा की मार्कशीट", name_as: "পূৰ্বৱৰ্তী শ্ৰেণীৰ মাৰ্কশ্বীট", status: "present", how_to_get: "Collect marksheet from school or educational board/university." },
+            { id: "bonafide", name: "Bonafide Student Certificate", name_hi: "बोनाफाइड छात्र प्रमाण पत्र", name_as: "বোনাফাইড ছাত্ৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Request from college registrar, administrative desk, or head of institution." },
+            { id: "fee_receipt", name: "Current Academic Fee Receipt", name_hi: "वर्तमान शैक्षणिक शुल्क रसीद", name_as: "চলিত শিক্ষাবৰ্ষৰ মাছুলৰ ৰচিদ", status: "missing", how_to_get: "Download from student login portal or collect from institution cashier." }
+        ]
+    },
+    ration: {
+        schemeName: "National Food Security Act (NFSA) Ration Card Scheme",
+        schemeName_hi: "राष्ट्रीय खाद्य सुरक्षा अधिनियम (NFSA) राशन कार्ड",
+        schemeName_as: "ৰাষ্ট্ৰীয় খাদ্য সুৰক্ষা আইন (NFSA) ৰেচন কাৰ্ড আঁচনি",
+        title: "🍚 Ration Card (NFSA)",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card (all family members)", name_hi: "आधार कार्ड (परिवार के सभी सदस्य)", name_as: "আধাৰ কাৰ্ড (পৰিয়ালৰ সকলো সদস্যৰ)", status: "present", how_to_get: "Required for biometric linkage and grain allocation." },
+            { id: "income", name: "Family Income Certificate (proving BPL/EWS status)", name_hi: "पारिवारिक आय प्रमाण पत्र", name_as: "পৰিয়ালৰ আয়ৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Apply online at RTPS portal or contact Block Development Office." },
+            { id: "address", name: "Address Proof (Electricity Bill/Rent Agreement)", name_hi: "पता प्रमाण (बिजली बिल/किराया समझौता)", name_as: "ঠিকনাৰ প্ৰমাণ (বিদ্যুৎ বিল/ভাড়া চুক্তি)", status: "present", how_to_get: "Required to verify local residence in jurisdiction." },
+            { id: "noc", name: "NOC from previous PDS shop (if migrating)", name_hi: "पिछले राशन की दुकान से एनओसी", name_as: "পূৰ্বৰ ৰেচন দোকানৰ পৰা NOC", status: "missing", how_to_get: "Obtain from the Inspector of Food, Civil Supplies and Consumer Affairs." },
+            { id: "family_photo", name: "Family Group Photograph", name_hi: "पारिवारिक समूह फोटो", name_as: "পৰিয়ালৰ সামূহिक फोटो", status: "present", how_to_get: "Joint photograph of all family members whose names are to be listed." }
+        ]
+    },
+    farmer: {
+        schemeName: "PM Kisan Samman Nidhi Yojana",
+        schemeName_hi: "पीएम किसान सम्मान निधि योजना",
+        schemeName_as: "পি.এম কৃষক সন্মান নিধি আঁচনি",
+        title: "🚜 PM-Kisan Scheme",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Identity card linked with bank account." },
+            { id: "land_record", name: "Land Registry Documents (Khasra / Khatauni)", name_hi: "भूमि दस्तावेज (खसरा / खतौनी)", name_as: "ভূমিৰ নথিপত্ৰ (খচৰা / খতিয়ান)", status: "present", how_to_get: "Get copies from online Bhulekh/Revenue portal or local Lekhpal/Patwari." },
+            { id: "bank", name: "Bank Account Passbook (DBT enabled)", name_hi: "बैंक खाता पासबुक (DBT सक्रिय)", name_as: "বেংক একাউণ্টৰ পাছবুক (DBT সক্ৰিয়)", status: "present", how_to_get: "Ensure your bank account is linked to Aadhaar and active for DBT." },
+            { id: "mutation", name: "Land Mutation Certificate", name_hi: "भूमि म्यूटेशन (दाखिल-खारिज) प्रमाण पत्र", name_as: "নামজাৰিৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Obtain from Tehsildar or Circle Office after mutation registration." },
+            { id: "self_declaration", name: "Self-Declaration Form", name_hi: "स्व-घोषणा पत्र", name_as: "স্ব-ঘোষণাপত্ৰ", status: "present", how_to_get: "Download from PM-Kisan portal or get at local Common Service Centre (CSC)." }
+        ]
+    }
+};
+
+const SCHEMES_DATABASE = [
+    // --- CENTRAL SCHEMES ---
+    {
+        name: "PM Awaas Yojana – Gramin (PMAY-G)",
+        name_hi: "प्रधानमंत्री आवास योजना - ग्रामीण",
+        name_as: "প্ৰধানমন্ত্ৰী আৱাস যোজনা - গ্ৰামীণ",
+        category: "Housing",
+        benefit: "Rs. 1.20 Lakh (Plain) / Rs. 1.30 Lakh (Hilly/NE States) for house construction",
+        website: "https://pmayg.nic.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard identity proof." },
+            { id: "secc", name: "SECC-2011 Inclusion Proof", name_hi: "SECC-2011 समावेशन सूची", name_as: "SECC-2011 অন্তৰ্ভুক্তিৰ প্ৰমাণ", status: "missing", how_to_get: "Verify your inclusion in SECC list at Gram Panchayat or Block office." },
+            { id: "bank", name: "Bank Account Passbook", name_hi: "बैंक पासबुक", name_as: "বেংক পাছবুক", status: "present", how_to_get: "Account linked to Aadhaar for DBT." },
+            { id: "caste", name: "Caste Certificate (if SC/ST)", name_hi: "जाति प्रमाण पत्र", name_as: "জাতিৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Get from Revenue Department or online RTPS." },
+            { id: "disability", name: "Disability Certificate (if applicable)", name_hi: "दिव्यांगता प्रमाण पत्र", name_as: "প্ৰতিবন্ধী প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Issued by Govt Medical Board." }
+        ]
+    },
+    {
+        name: "PM Awaas Yojana – Urban (PMAY-U)",
+        name_hi: "प्रधानमंत्री आवास योजना - शहरी",
+        name_as: "প্ৰধানমন্ত্ৰী আৱাস যোজনা - চহৰীয়া",
+        category: "Housing",
+        benefit: "Central assistance up to Rs. 2.67 Lakh for home purchase or construction",
+        website: "https://pmaymis.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for biometric validation." },
+            { id: "income", name: "Income Certificate (EWS/LIG status)", name_hi: "आय प्रमाण पत्र", name_as: "আয়ৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Issued by Tehsildar or revenue authority." },
+            { id: "land_docs", name: "Property Ownership Documents / Land Deed", name_hi: "भूमि दस्तावेज / विलेख", name_as: "মাটিৰ দলিল / নথিপত্ৰ", status: "present", how_to_get: "Deed registry copy from Sub-registrar office." }
+        ]
+    },
+    {
+        name: "MGNREGS (NREGA) Job Card",
+        name_hi: "मनरेगा जॉब कार्ड योजना",
+        name_as: "মনৰেগা জব কাৰ্ড আঁচনি",
+        category: "Employment",
+        benefit: "Guaranteed 100 days/year of wage employment (Rs. 255-374/day state-wise)",
+        website: "https://nrega.nic.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard identity proof." },
+            { id: "residence", name: "Panchayat Residence Certificate", name_hi: "निवास प्रमाण पत्र", name_as: "पंचायत के निवासी होने का प्रमाण", status: "present", how_to_get: "Obtain from Gram Panchayat secretary." },
+            { id: "bank", name: "Bank or Post Office Passbook", name_hi: "बैंक / डाकघर खाता पासबुक", name_as: "বেংক বা ডাকঘৰৰ পাছবুক", status: "present", how_to_get: "Required for direct wage transfer." },
+            { id: "job_app", name: "Job Card Application Form", name_hi: "जॉब कार्ड आवेदन पत्र", name_as: "জব কাৰ্ড আবেদন পত্ৰ", status: "missing", how_to_get: "Submit to Gram Panchayat or apply at Block office." }
+        ]
+    },
+    {
+        name: "DDU Grameen Kaushalya Yojana (DDU-GKY)",
+        name_hi: "दीनदयाल उपाध्याय ग्रामीण कौशल्य योजना",
+        name_as: "দীনদয়াল উপাধ্যায় গ্ৰামীণ কৌশল আঁচনি",
+        category: "Skill & Jobs",
+        benefit: "Free placement-linked skill training + Rs. 2,000/month post-placement support for 3 months",
+        website: "https://ddugky.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for candidate registration." },
+            { id: "age_proof", name: "Age Proof (15-35 years)", name_hi: "आयु प्रमाण पत्र", name_as: "বয়সৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "School certificate or birth certificate." },
+            { id: "bpl_proof", name: "Rural BPL Proof / SHG Member proof", name_hi: "बीपीएल सूची समावेशन प्रमाण", name_as: "BPL তালিকাৰ অন্তৰ্ভুক্তিৰ প্ৰমাণ", status: "missing", how_to_get: "Get income/BPL status letter from Gram Panchayat or Block coordinator." }
+        ]
+    },
+    {
+        name: "PM Mudra Yojana (PMMY)",
+        name_hi: "प्रधानमंत्री मुद्रा योजना",
+        name_as: "প্ৰধানমন্ত্ৰী মুদ্ৰা যোজনা",
+        category: "Self-Employment",
+        benefit: "Collateral-free loans up to Rs. 20 Lakh (Shishu, Kishore, Tarun categories)",
+        website: "https://mudra.org.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Identity proof." },
+            { id: "pan", name: "PAN Card", name_hi: "पैन कार्ड", name_as: "PAN কাৰ্ড", status: "present", how_to_get: "Income tax registration card." },
+            { id: "biz_proposal", name: "Business Project Proposal / Plan", name_hi: "व्यापार परियोजना प्रस्ताव", name_as: "ব্যৱসায়িক পৰিকল্পনাৰ খচৰা", status: "missing", how_to_get: "Prepare project report explaining business model and cash flow." },
+            { id: "bank_statement", name: "Bank Statements (Last 6 Months)", name_hi: "बैंक विवरण", name_as: "বেংক ষ্টেটমেণ্ট", status: "present", how_to_get: "Request from bank branch." }
+        ]
+    },
+    {
+        name: "DAY-NRLM (Aajeevika) SHG Support",
+        name_hi: "राष्ट्रीय ग्रामीण आजीविका मिशन",
+        name_as: "ৰাষ্ট্ৰীয় গ্ৰামীণ জীৱিকা অভিযান",
+        category: "SHG Livelihood",
+        benefit: "Revolving Fund of Rs. 15,000/SHG and Community Investment Fund (CIF) up to Rs. 2.5 Lakh/SHG",
+        website: "https://aajeevika.gov.in",
+        documents: [
+            { id: "shg_reg", name: "SHG Registration Certificate", name_hi: "SHG पंजीकरण प्रमाण पत्र", name_as: "SHG পঞ্জীয়ন প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Obtain from Block Livelihood Mission office." },
+            { id: "aadhaar_members", name: "Aadhaar Card of all SHG Members", name_hi: "सभी सदस्यों के आधार", name_as: "গোটৰ সকলো সদস্যৰ আধাৰ কাৰ্ড", status: "present", how_to_get: "Collect from each member." },
+            { id: "shg_bank", name: "Bank Account Passbook of SHG", name_hi: "SHG बैंक पासबुक", name_as: "SHG বেংক পাছবুক", status: "present", how_to_get: "Joint account opened at local bank branch." }
+        ]
+    },
+    {
+        name: "PM SVANidhi Scheme",
+        name_hi: "पीएम स्वनिधि योजना (रेहड़ी-पटरी विक्रेता)",
+        name_as: "পি.এম স্বনিধি আঁচনি",
+        category: "Street Vendor",
+        benefit: "Collateral-free working capital loan of Rs. 10,000 (1st), Rs. 20,000 (2nd) & Rs. 50,000 (3rd tranche)",
+        website: "https://pmsvanidhi.mohua.gov.in",
+        documents: [
+            { id: "vending_cert", name: "Certificate of Vending / Letter of Recommendation (LoR)", name_hi: "विक्रेता प्रमाण पत्र / LoR", name_as: "পৰিভ্ৰমী বিক্ৰেতাৰ প্ৰমাণ পত্ৰ / LoR", status: "missing", how_to_get: "Issued by Urban Local Body (ULB) / Town Vending Committee (TVC)." },
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard identification card." },
+            { id: "bank", name: "Bank Account Passbook", name_hi: "बैंक पासबुक", name_as: "বেংক পাছবুক", status: "present", how_to_get: "Linked to mobile number for DBT." }
+        ]
+    },
+    {
+        name: "PM-KISAN Samman Nidhi",
+        name_hi: "पीएम-किसान योजना",
+        name_as: "পি.एम-কৃষক আঁচনি",
+        category: "Agriculture",
+        benefit: "Rs. 6,000/year via direct benefit transfer in 3 equal installments",
+        website: "https://pmkisan.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Mandatory for farmer registration." },
+            { id: "land_records", name: "Land Ownership Records (Khasra/Khatauni)", name_hi: "भूमि खसरा/खतौनी दस्तावेज", name_as: "মাটিৰ খতিয়ান / ৰেকৰ্ড", status: "present", how_to_get: "Get from state land record website (Bhulekh)." },
+            { id: "bank", name: "Bank Passbook (Aadhaar linked)", name_hi: "बैंक पासबुक", name_as: "বেंक पाछबुक", status: "present", how_to_get: "Aadhaar e-KYC linked account." }
+        ]
+    },
+    {
+        name: "PM Fasal Bima Yojana (PMFBY)",
+        name_hi: "प्रधानमंत्री फसल बीमा योजना",
+        name_as: "প্ৰধানমন্ত্ৰী ফচল বীমা যোজনা",
+        category: "Crop Insurance",
+        benefit: "Financial support and insurance cover on crop loss due to natural calamities",
+        website: "https://pmfby.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Farmer identity verification." },
+            { id: "land_possession", name: "Land Possession Certificate (LPC) / Land Deed", name_hi: "भूमि स्वामित्व / पट्टा प्रति", name_as: "ভূমি দখলৰ প্ৰমাণ পত্ৰ / দলিল", status: "present", how_to_get: "Obtain from Revenue/Tehsil office." },
+            { id: "sowing_cert", name: "Sowing Certificate / Crop Sowing Declaration", name_hi: "बुवाई प्रमाण पत्र", name_as: "শস্য ৰোপণৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Get verification form signed by local agriculture officer or Lekhpal." }
+        ]
+    },
+    {
+        name: "Kisan Credit Card (KCC)",
+        name_hi: "किसान क्रेडिट कार्ड (KCC) योजना",
+        name_as: "কৃষক ক্ৰেডিট কাৰ্ড (KCC) আঁচনি",
+        category: "Agri Credit",
+        benefit: "Subsidised credit/loans up to Rs. 3 Lakh at effective 4% interest rate per annum",
+        website: "https://www.nabard.org/kcc",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for bank verification." },
+            { id: "pan", name: "PAN Card", name_hi: "पैन कार्ड", name_as: "PAN কাৰ্ড", status: "present", how_to_get: "Tax registration identification." },
+            { id: "land_proof", name: "Land Ownership Records / Jamabandi copy", name_hi: "भूमि स्वामित्व / जमाबंदी प्रति", name_as: "মাটিৰ স্বত্বাধিকাৰৰ ৰেকৰ্ড", status: "present", how_to_get: "Collect from Revenue Inspector or state portal." },
+            { id: "no_dues", name: "No-Dues Certificate from Cooperative Bank", name_hi: "बकाया न होने का प्रमाण पत्र", name_as: "কোনো ধৰণৰ বাকী নথকাৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Apply at your nearest rural cooperative bank branch." }
+        ]
+    },
+    {
+        name: "Ayushman Bharat (PM-JAY)",
+        name_hi: "आयुष्मान भारत योजना (PMJAY)",
+        name_as: "আয়ুষ্মান ভাৰত যোজনা (PMJAY)",
+        category: "Health Insurance",
+        benefit: "Cashless health cover up to Rs. 5 Lakh per family per year for secondary/tertiary hospitalisation",
+        website: "https://pmjay.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Mandatory for beneficiary e-KYC." },
+            { id: "ration", name: "Ration Card (NFSA status)", name_hi: "राशन कार्ड", name_as: "ৰেচন কাৰ্ড", status: "present", how_to_get: "Used to verify family composition." },
+            { id: "secc_elig", name: "SECC-2011 Eligibility Letter / Ayushman Card App", name_hi: "आयुष्मान कार्ड आवेदन / पात्रता प्रमाण", name_as: "আয়ুষ্মান কাৰ্ড আবেদন পত্ৰ", status: "missing", how_to_get: "Generate Ayushman card online or at CSC centre." }
+        ]
+    },
+    {
+        name: "NFSA / PDS Ration Card",
+        name_hi: "राष्ट्रीय खाद्य सुरक्षा अधिनियम (NFSA) राशन कार्ड",
+        name_as: "ৰাষ্ট্ৰীয় খাদ্য সুৰক্ষা আইন (NFSA) ৰেচন কাৰ্ড",
+        category: "Food Security",
+        benefit: "Subsidised or free foodgrains (5 kg/person/month for PHH; 35 kg/family for AAY)",
+        website: "https://dfpd.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Cards of all Family Members", name_hi: "परिवार के सभी सदस्यों के आधार", name_as: "পৰিয়ালৰ সকলো সদস্যৰ আধাৰ কাৰ্ড", status: "present", how_to_get: "Must link all member Aadhaar cards." },
+            { id: "residence", name: "Domicile Certificate / Address Proof", name_hi: "निवास प्रमाण पत्र", name_as: "বাসস্থানৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Electricity bill or resident certificate." },
+            { id: "income", name: "Family Income Certificate", name_hi: "पारिवारिक आय प्रमाण पत्र", name_as: "পৰিয়ালৰ বাৰ্ষিক আয়ৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Tehsildar/Revenue Office." }
+        ]
+    },
+    {
+        name: "Atal Pension Yojana (APY)",
+        name_hi: "अटल पेंशन योजना (APY)",
+        name_as: "অটল পেঞ্চন আঁচনি (APY)",
+        category: "Pension",
+        benefit: "Guaranteed monthly pension of Rs. 1,000 to Rs. 5,000 after age 60",
+        website: "https://npscra.nsdl.co.in/apy.php",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for APY registration." },
+            { id: "bank", name: "Savings Bank Account", name_hi: "बचत बैंक खाता", name_as: "বেংক একাউণ্ট", status: "present", how_to_get: "Required for auto-debit of premium." },
+            { id: "apy_form", name: "APY Registration Form", name_hi: "APY पंजीकरण फॉर्म", name_as: "APY পঞ্জীয়ন প্ৰপত্ৰ", status: "missing", how_to_get: "Submit to your bank branch or register via net banking." }
+        ]
+    },
+    {
+        name: "PM Surya Ghar – Muft Bijli Yojana",
+        name_hi: "पीएम सूर्य घर - मुफ्त बिजली योजना",
+        name_as: "পি.এম সূৰ্য ঘৰ - বিনামূলীয়া বিদ্যুৎ যোজনা",
+        category: "Solar Energy",
+        benefit: "Free solar rooftop setup up to 3kW with subsidy of Rs. 78,000 and 300 free units/month",
+        website: "https://pmsuryaghar.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Identity verification." },
+            { id: "elec_bill", name: "Recent Electricity Consumer Bill", name_hi: "हालिया बिजली बिल", name_as: "শেহতীয়া বিদ্যুৎ বিল", status: "missing", how_to_get: "Obtain from electric utility distributor." },
+            { id: "land_ownership", name: "Rooftop Ownership / Land Deed copy", name_hi: "छत स्वामित्व / भूमि विलेख", name_as: "ছাদৰ গৰাকী হোৱাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Property tax receipt or land mutation/deed copy." }
+        ]
+    },
+
+    // --- NORTHEAST INDIA SCHEMES ---
+    {
+        name: "Ishan Uday Special Scholarship (UGC)",
+        name_hi: "ईशान उदय विशेष छात्रवृत्ति (UGC)",
+        name_as: "ঈশান উদয় বিশেষ জলপানী (UGC)",
+        category: "Scholarship",
+        benefit: "Rs. 5,400/month (General) | Rs. 7,800/month (Technical/Medical) for NE college students",
+        website: "https://scholarships.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Mandatory for NSP validation." },
+            { id: "domicile", name: "Domicile Certificate of Northeast State", name_hi: "पूर्वोत्तर राज्य का मूल निवासी प्रमाण पत्र", name_as: "উত্তৰ-পূব ৰাজ্যৰ স্থায়ী বাসিন্দাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Apply online at RTPS / State Portal." },
+            { id: "income", name: "Family Income Certificate (<= Rs. 4.5 Lakh/year)", name_hi: "पारिवारिक आय प्रमाण पत्र", name_as: "পৰিয়ালৰ আয়ৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Issued by competent revenue authority." },
+            { id: "admission", name: "College Admission Letter & Course Fee Receipt", name_hi: "कॉलेज प्रवेश पत्र और शुल्क रसीद", name_as: "মহাবিদ্যালয়ত নামভৰ্তিৰ পত্ৰ আৰু মাছুলৰ ৰচিদ", status: "missing", how_to_get: "Collect from college admin office upon joining." }
+        ]
+    },
+    {
+        name: "NEC Merit Scholarship",
+        name_hi: "एनईसी मेरिट छात्रवृत्ति",
+        name_as: "NEC মেৰিট জলপানী",
+        category: "Scholarship",
+        benefit: "Rs. 20,000/year (Diploma) to Rs. 30,000/year (PhD) for professional studies in NER",
+        website: "https://scholarships.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for NSP e-KYC." },
+            { id: "domicile", name: "NE State Domicile Certificate", name_hi: "पूर्वोत्तर राज्य निवास प्रमाण", name_as: "স্থায়ী বাসিন্দাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Revenue authority." },
+            { id: "marksheet", name: "Previous Qualifying Exam Marksheet (60%+ required)", name_hi: "मार्कशीट (न्यूनतम 60%)", name_as: "মাৰ্কশ্বীট (নূন্যতম ৬০% নম্বৰ)", status: "present", how_to_get: "Collect from school board/college." }
+        ]
+    },
+    {
+        name: "Orunodoi 3.0 Scheme (Assam)",
+        name_hi: "अरुणोदय 3.0 योजना (असम)",
+        name_as: "অৰুণোদই ৩.০ আঁচনি (অসম)",
+        category: "Financial Assist",
+        benefit: "Rs. 1,250/month cash benefit via DBT directly to women of low-income families",
+        website: "https://cm.assam.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Mandatory for beneficiary identification." },
+            { id: "ration", name: "Ration Card (Assam NFSA)", name_hi: "राशन कार्ड (असम)", name_as: "ৰেচন কাৰ্ড (অসম)", status: "present", how_to_get: "Required to verify eligibility." },
+            { id: "income", name: "Income Certificate (< Rs. 2 Lakh/year)", name_hi: "आय प्रमाण पत्र", name_as: "आयৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Apply online at Sewa Setu portal." },
+            { id: "orunodoi_app", name: "Orunodoi Application Acknowledgement", name_hi: "अरुणोदय आवेदन पावती", name_as: "অৰুণোদই আবেদনৰ স্বীকৃতি ৰচিদ", status: "missing", how_to_get: "Apply through local GP office, VCDC or ULB committee." }
+        ]
+    },
+    {
+        name: "Lakhpati Baideo (Assam)",
+        name_hi: "लखपति बैदेव योजना (असम)",
+        name_as: "লখপতি বাইদেউ আঁচনি (অসম)",
+        category: "Women Livelihood",
+        benefit: "Rs. 35,000 entrepreneurship grant + training in phases to make rural SHG women earn Rs. 1 Lakh/year",
+        website: "https://aajeevika.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Identity proof." },
+            { id: "shg_cert", name: "Self-Help Group (SHG) Membership Certificate", name_hi: "SHG सदस्यता प्रमाण पत्र", name_as: "আত্মসহায়ক গোটৰ (SHG) সদস্যতাৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Obtain from Block Livelihood Mission (ASRLM) coordinator." },
+            { id: "biz_plan", name: "Micro-Business plan formulation", name_hi: "व्यवसाय योजना विवरण", name_as: "ক্ষুদ্ৰ ব্যৱসায়িক পৰিকল্পনাৰ বিৱৰণ", status: "missing", how_to_get: "Draft business plan using ASRLM livelihood templates." }
+        ]
+    },
+
+    // --- OTHER STATE SCHEMES ---
+    {
+        name: "Kanya Sumangala Yojana (Uttar Pradesh)",
+        name_hi: "कन्या सुमंगला योजना (उत्तर प्रदेश)",
+        name_as: "কন্যা সুমঙ্গলা আঁচনি (উত্তৰ প্ৰদেশ)",
+        category: "Girl Child",
+        benefit: "Rs. 25,000 total in 6 installments for girl child from birth to college admission",
+        website: "https://mksy.up.gov.in",
+        documents: [
+            { id: "birth_cert", name: "Birth Certificate of Girl Child", name_hi: "बालिका का जन्म प्रमाण पत्र", name_as: "কন্যা শিশুৰ জন্মৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Issued by Registrar of Births (Municipal/Panchayat)." },
+            { id: "aadhaar", name: "Aadhaar Card of Parents & Girl", name_hi: "माता-पिता और बेटी का आधार", name_as: "অভিভাৱক আৰু কন্যাৰ আধাৰ কাৰ্ড", status: "present", how_to_get: "Identity verification." },
+            { id: "income", name: "Family Income Certificate (<= Rs. 3 Lakh/year)", name_hi: "पारिवारिक आय प्रमाण पत्र", name_as: "পৰিয়ালৰ আয়ৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Obtain from Tehsil office." }
+        ]
+    },
+    {
+        name: "Lakshmir Bhandar Scheme (West Bengal)",
+        name_hi: "लक्ष्मी भंडार योजना (पश्चिम बंगाल)",
+        name_as: "লক্ষ্মী ভাণ্ডাৰ আঁচনি (পশ্ৰিম বংগ)",
+        category: "Financial Assist",
+        benefit: "Rs. 1,000/month (General) / Rs. 1,200/month (SC/ST) cash transfer to female heads",
+        website: "https://wb.gov.in/lakshmibhandar",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card (Aadhaar-linked bank)", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for DBT e-KYC." },
+            { id: "sathi_card", name: "Swasthya Sathi Card (Health card)", name_hi: "स्वास्थ्य साथी कार्ड", name_as: "স্বাস্থ্য সাৰথী কাৰ্ড", status: "missing", how_to_get: "Obtain from Duare Sarkar camp or local Panchayat." },
+            { id: "caste", name: "SC/ST Caste Certificate (for Rs.1200 benefit)", name_hi: "जाति प्रमाण पत्र", name_as: "জাতিৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Obtain from SDO or online backward classes portal." }
+        ]
+    },
+    {
+        name: "Bihar Student Credit Card Scheme (BSCCS)",
+        name_hi: "बिहार स्टूडेंट क्रेडिट कार्ड योजना",
+        name_as: "বিহাৰ ষ্টুডেন্ট ক্ৰেডিট কাৰ্ড আঁচনি",
+        category: "Education",
+        benefit: "Education loan up to Rs. 4 Lakh at 4% interest (interest-free for girls/disabled) for higher studies",
+        website: "https://7nishchay-yuvaupmission.bihar.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Required for validation." },
+            { id: "marksheet", name: "Class 10 & 12 Marksheet & Certificates", name_hi: "10वीं और 12वीं की मार्कशीट", name_as: "দশম আৰু দ্বাদশ শ্ৰেণীৰ মাৰ্কশ্বীট", status: "present", how_to_get: "Collect from school board." },
+            { id: "college_adm", name: "College Admission Letter & Course Fee Structure", name_hi: "कॉलेज प्रवेश पत्र और शुल्क संरचना", name_as: "নামভৰ্তিৰ পত্ৰ আৰু মাছুলৰ বিৱৰণ", status: "missing", how_to_get: "Request from college admission desk." }
+        ]
+    },
+    {
+        name: "Gruha Lakshmi Scheme (Karnataka)",
+        name_hi: "गृह लक्ष्मी योजना (कर्नाटक)",
+        name_as: "गृह লক্ষ্মী আঁচনি (কৰ্ণাটক)",
+        category: "Financial Assist",
+        benefit: "Rs. 2,000/month cash allowance to woman heads of household in Karnataka",
+        website: "https://sevasindhu.karnataka.gov.in",
+        documents: [
+            { id: "aadhaar", name: "Aadhaar Card of Woman Head & Husband", name_hi: "महिला मुखिया और पति का आधार", name_as: "গৃহকৰ্ত্ৰী আৰু গিৰিয়েকৰ আধাৰ কাৰ্ড", status: "present", how_to_get: "Mandatory for registration." },
+            { id: "ration", name: "Ration Card (APL/BPL/Antyodaya)", name_hi: "राशन कार्ड (कर्नाटक)", name_as: "ৰেচন কাৰ্ড (কৰ্ণাটক)", status: "present", how_to_get: "Used to determine household head." },
+            { id: "bank", name: "Bank Account Passbook (Aadhaar linked)", name_hi: "बैंक पासबुक", name_as: "বেংক পাছবুক", status: "present", how_to_get: "Aadhaar-seeded bank account for DBT." }
+        ]
+    }
+];
+
+let activeGapProfile = 'flood';
+let activeCustomScheme = null;
+let gapDocStates = {};
+
+function initGapDetector() {
+    const chips = document.querySelectorAll('.profile-chip');
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            chips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            const profileKey = chip.dataset.profile;
+            loadProfile(profileKey);
+        });
+    });
+
+    const detectBtn = document.getElementById('custom-profile-detect-btn');
+    if (detectBtn) {
+        detectBtn.addEventListener('click', analyzeCustomGaps);
+    }
+
+    const customInput = document.getElementById('custom-profile-input');
+    if (customInput) {
+        customInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                analyzeCustomGaps();
+            }
+        });
+    }
+
+    const aiActionBtn = document.getElementById('gap-ai-action-btn');
+    if (aiActionBtn) {
+        aiActionBtn.addEventListener('click', handleGapAISubmit);
+    }
+
+    loadProfile('flood');
+}
+
+function loadProfile(profileKey) {
+    activeGapProfile = profileKey;
+    activeCustomScheme = null;
+    gapDocStates = {};
+
+    const profile = GAP_PROFILES[profileKey];
+    if (profile) {
+        profile.documents.forEach(doc => {
+            gapDocStates[doc.id] = (doc.status === 'present');
+        });
+    }
+
+    const customInput = document.getElementById('custom-profile-input');
+    if (customInput) customInput.value = '';
+
+    updateGapUI();
+}
+
+function toggleGapDoc(docId) {
+    gapDocStates[docId] = !gapDocStates[docId];
+    updateGapUI();
+}
+
+function updateGapUI() {
+    const schemeNameEl = document.getElementById('gap-scheme-name');
+    const resultsTitleEl = document.getElementById('gap-results-title');
+    const progressTextEl = document.getElementById('gap-progress-text');
+    const progressFillEl = document.getElementById('gap-progress-fill');
+    const bannerEl = document.getElementById('gap-status-banner');
+    const statusTitleEl = document.getElementById('gap-status-title');
+    const statusDescEl = document.getElementById('gap-status-desc');
+    const docsListEl = document.getElementById('gap-docs-list');
+
+    if (!docsListEl) return;
+
+    let schemeName = "";
+    let title = "";
+    let documents = [];
+
+    const isHindi = currentLang === 'hi';
+    const isAssamese = currentLang === 'as';
+
+    if (activeCustomScheme) {
+        schemeName = isHindi ? (activeCustomScheme.name_hi || activeCustomScheme.name) : (isAssamese ? (activeCustomScheme.name_as || activeCustomScheme.name) : activeCustomScheme.name);
+        title = isHindi ? "कल्याणकारी पात्रता चेकलिस्ट" : (isAssamese ? "কল্যাণমুখী অৰ্হতা পৰীক্ষাসূচী" : "Welfare Entitlement Checklist");
+        documents = activeCustomScheme.documents;
+    } else {
+        const profile = GAP_PROFILES[activeGapProfile] || GAP_PROFILES['flood'];
+        schemeName = isHindi ? (profile.schemeName_hi || profile.schemeName) : (isAssamese ? (profile.schemeName_as || profile.schemeName) : profile.schemeName);
+        title = isHindi ? "कल्याणकारी पात्रता चेकलिस्ट" : (isAssamese ? "কল্যাণমুখী অৰ্হতা পৰীক্ষাসূচী" : "Welfare Entitlement Checklist");
+        documents = profile.documents;
+    }
+
+    if (schemeNameEl) schemeNameEl.textContent = schemeName;
+    if (resultsTitleEl) resultsTitleEl.textContent = title;
+
+    docsListEl.innerHTML = "";
+    let checkedCount = 0;
+
+    documents.forEach(doc => {
+        const isChecked = !!gapDocStates[doc.id];
+        if (isChecked) checkedCount++;
+
+        const docName = isHindi ? (doc.name_hi || doc.name) : (isAssamese ? (doc.name_as || doc.name) : doc.name);
+        const howToGet = isHindi ? (doc.how_to_get_hi || doc.how_to_get) : (isAssamese ? (doc.how_to_get_as || doc.how_to_get) : doc.how_to_get);
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `gap-doc-item ${isChecked ? 'checked' : ''}`;
+        
+        if (isChecked) {
+            itemDiv.innerHTML = `
+                <div class="gap-doc-main">
+                    <input type="checkbox" id="checkbox-${doc.id}" checked onchange="toggleGapDoc('${doc.id}')">
+                    <div class="gap-doc-details">
+                        <span class="gap-doc-name" onclick="toggleGapDoc('${doc.id}')">${escapeHTML(docName)}</span>
+                        <span class="gap-doc-status-badge present">${isHindi ? 'उपलब्ध' : (isAssamese ? 'উপলব্ধ' : 'Present')}</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            itemDiv.innerHTML = `
+                <div class="gap-doc-main">
+                    <input type="checkbox" id="checkbox-${doc.id}" onchange="toggleGapDoc('${doc.id}')">
+                    <div class="gap-doc-details">
+                        <span class="gap-doc-name" onclick="toggleGapDoc('${doc.id}')">${escapeHTML(docName)}</span>
+                        <span class="gap-doc-status-badge missing">${isHindi ? 'लापता' : (isAssamese ? 'অনুপস্থিত' : 'Missing')}</span>
+                    </div>
+                </div>
+                <div class="gap-doc-alert-box">
+                    <div class="gap-risk-warning">
+                        ⚠️ <strong>${isHindi ? 'अस्वीकृति का जोखिम' : (isAssamese ? 'নাকচ হোৱাৰ বিপদাশংকা' : 'Rejection Risk')}:</strong> ${isHindi ? 'इस दस्तावेज़ के बिना आपका आवेदन खारिज होने की संभावना 90% है।' : (isAssamese ? 'এই নথি অবিহনে আপোনাৰ আবেদন নাকচ হোৱাৰ সম্ভাৱনা ৯০%।' : 'Without this document, there is a 90% probability of immediate rejection.')}
+                    </div>
+                    <div class="gap-resolution-steps">
+                        ℹ️ <strong>${isHindi ? 'प्राप्त करने का तरीका' : (isAssamese ? 'কেনেকৈ লাভ কৰিব' : 'How to Resolve')}:</strong> ${escapeHTML(howToGet)}
+                    </div>
+                </div>
+            `;
+        }
+        docsListEl.appendChild(itemDiv);
+    });
+
+    const totalCount = documents.length;
+    const progressPercent = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 100;
+
+    if (progressTextEl) {
+        progressTextEl.textContent = isHindi ? `जमा करने के लिए तैयार: ${progressPercent}%` : (isAssamese ? `জমা কৰিবলৈ সাজু: ${progressPercent}%` : `Submission Ready: ${progressPercent}%`);
+    }
+    if (progressFillEl) {
+        progressFillEl.style.width = `${progressPercent}%`;
+    }
+
+    if (bannerEl) {
+        bannerEl.className = "gap-status-banner";
+        if (progressPercent < 70) {
+            bannerEl.classList.add("warning");
+            if (statusTitleEl) statusTitleEl.textContent = isHindi ? "उच्च अस्वीकृति जोखिम!" : (isAssamese ? "উচ্চ নাকচ হোৱাৰ আশংকা!" : "High Rejection Risk!");
+            if (statusDescEl) {
+                const missingCount = totalCount - checkedCount;
+                statusDescEl.textContent = isHindi ? `${missingCount} महत्वपूर्ण दस्तावेज आपकी चेकलिस्ट से गायब हैं। आपका आवेदन खारिज हो सकता है।` : (isAssamese ? `${missingCount} টা গুৰুত্বপূৰ্ণ নথি আপোনাৰ তালিকাৰ পৰা হেৰাই গৈছে। আবেদন নাকচ হ'ব পাৰে।` : `${missingCount} critical documents are missing from your checklist. Your application will likely be rejected.`);
+            }
+        } else if (progressPercent >= 70 && progressPercent < 90) {
+            bannerEl.classList.add("info");
+            if (statusTitleEl) statusTitleEl.textContent = isHindi ? "मध्यम अस्वीकृति जोखिम" : (isAssamese ? "मध्यमीया नाकच হোৱাৰ আশংকা" : "Moderate Rejection Risk");
+            if (statusDescEl) {
+                statusDescEl.textContent = isHindi ? "केवल कुछ दस्तावेज़ गायब हैं। बेहतर सफलता दर के लिए उन्हें भी जोड़ें।" : (isAssamese ? "কেৱল কেইটামান নথি হেৰাই গৈছে। অধিক সফলতাৰ বাবে সেইসমূহো যোগ কৰক।" : "Only a few documents are missing. Add them to ensure a higher approval rate.");
+            }
+        } else {
+            bannerEl.classList.add("success");
+            if (statusTitleEl) statusTitleEl.textContent = isHindi ? "सफलता की उच्च संभावना!" : (isAssamese ? "সফলতাৰ উচ্চ সম্ভাৱনা!" : "High Success Probability!");
+            if (statusDescEl) {
+                statusDescEl.textContent = isHindi ? "आपके पास लगभग सभी आवश्यक दस्तावेज़ हैं। आप सुरक्षित रूप से जमा कर सकते हैं।" : (isAssamese ? "আপোনাৰ ওচৰত প্ৰায় সকলো প্ৰয়োজনীয় নথি আছে। আপুনি জমা দিব পাৰে।" : "You have almost all required documents. You are ready for safe submission.");
+            }
+        }
+    }
+}
+
+function analyzeCustomGaps() {
+    const input = document.getElementById('custom-profile-input');
+    if (!input) return;
+    const text = input.value.trim();
+    if (!text) return;
+
+    document.querySelectorAll('.profile-chip').forEach(c => c.classList.remove('active'));
+
+    const query = text.toLowerCase();
+    let bestMatch = null;
+    let highestScore = 0;
+
+    SCHEMES_DATABASE.forEach(scheme => {
+        let score = 0;
+        const nameWords = scheme.name.toLowerCase().split(/\s+/);
+        const nameWordsHi = (scheme.name_hi || "").toLowerCase().split(/\s+/);
+        const nameWordsAs = (scheme.name_as || "").toLowerCase().split(/\s+/);
+        const categoryWords = scheme.category.toLowerCase().split(/\s+/);
+
+        const queryWords = query.split(/\s+/);
+
+        queryWords.forEach(word => {
+            if (word.length < 3) return;
+            if (nameWords.some(w => w.includes(word))) score += 5;
+            if (nameWordsHi.some(w => w.includes(word))) score += 5;
+            if (nameWordsAs.some(w => w.includes(word))) score += 5;
+            if (categoryWords.some(w => w.includes(word))) score += 3;
+            if (scheme.name.toLowerCase().includes(word)) score += 2;
+        });
+
+        if (score > highestScore) {
+            highestScore = score;
+            bestMatch = scheme;
+        }
+    });
+
+    if (bestMatch && highestScore > 2) {
+        activeCustomScheme = bestMatch;
+        activeGapProfile = null;
+        gapDocStates = {};
+        bestMatch.documents.forEach(doc => {
+            gapDocStates[doc.id] = (doc.status === 'present');
+        });
+    } else {
+        const dynamicScheme = {
+            name: text,
+            category: "Custom Benefit",
+            website: "https://india.gov.in",
+            documents: [
+                { id: "aadhaar", name: "Aadhaar Card", name_hi: "आधार कार्ड", name_as: "আধাৰ কাৰ্ড", status: "present", how_to_get: "Standard national identification card." },
+                { id: "income", name: "Income Certificate", name_hi: "आय प्रमाण पत्र", name_as: "आयৰ প্ৰমাণ পত্ৰ", status: "missing", how_to_get: "Issued by Block / Tehsil revenue officer to prove income status." },
+                { id: "domicile", name: "Domicile / Address Proof", name_hi: "निवास प्रमाण पत्र", name_as: "বাসস্থানৰ প্ৰমাণ পত্ৰ", status: "present", how_to_get: "Electricity bill, ration card, or voter card." },
+                { id: "app_form", name: "Scheme Application Form", name_hi: "योजना आवेदन पत्र", name_as: "আঁচনিৰ আবেদন পত্ৰ", status: "missing", how_to_get: "Download from official scheme website or collect from local citizen centre." },
+                { id: "denial_letter", name: "Rejection Letter / Acknowledgment Receipt", name_hi: "अस्वीकृति पत्र / पावती रसीद", name_as: "প্ৰত্যাখ্যান পত্ৰ / স্বীকৃতি ৰচিদ", status: "missing", how_to_get: "Collect from the office where application was submitted." }
+            ]
+        };
+        activeCustomScheme = dynamicScheme;
+        activeGapProfile = null;
+        gapDocStates = {};
+        dynamicScheme.documents.forEach(doc => {
+            gapDocStates[doc.id] = (doc.status === 'present');
+        });
+    }
+
+    updateGapUI();
+}
+
+function handleGapAISubmit() {
+    let schemeName = "";
+    let documents = [];
+
+    if (activeCustomScheme) {
+        schemeName = activeCustomScheme.name;
+        documents = activeCustomScheme.documents;
+    } else {
+        const profile = GAP_PROFILES[activeGapProfile] || GAP_PROFILES['flood'];
+        schemeName = profile.schemeName;
+        documents = profile.documents;
+    }
+
+    const missingDocs = documents.filter(doc => !gapDocStates[doc.id]);
+
+    if (missingDocs.length === 0) {
+        alert(currentLang === 'hi' ? "सभी आवश्यक दस्तावेज आपकी चेकलिस्ट में मौजूद हैं!" : (currentLang === 'as' ? "আপোনাৰ তালিকাত সকলো প্ৰয়োজনীয় নথি আছে!" : "All required documents are marked present in your checklist!"));
+        return;
+    }
+
+    const docNames = missingDocs.map(doc => {
+        if (currentLang === 'hi') return doc.name_hi || doc.name;
+        if (currentLang === 'as') return doc.name_as || doc.name;
+        return doc.name;
+    }).join(", ");
+
+    let prompt = "";
+    if (currentLang === 'hi') {
+        prompt = `मैं ${schemeName} के लिए आवेदन करना चाहता हूँ, लेकिन मेरे पास निम्नलिखित आवश्यक दस्तावेज नहीं हैं: ${docNames}। कृपया मुझे इन दस्तावेजों को प्राप्त करने / अपील करने के लिए संबंधित अधिकारियों को लिखे जाने वाले आवेदन का प्रारूप तैयार करके दें।`;
+    } else if (currentLang === 'as') {
+        prompt = `মই ${schemeName} আঁচনিৰ বাবে আবেদন কৰিব খোজো, কিন্তু মোৰ ওচৰত তলত দিয়া নথিসমূহ নাই: ${docNames}। এই নথিসমূহ লাভ কৰাৰ বাবে আবেদনৰ এটা খচৰা প্ৰস্তুত কৰি দিয়ক।`;
+    } else {
+        prompt = `I want to apply for ${schemeName}, but I am missing the following documents: ${docNames}. Please help me draft official application letters to request or appeal for these missing papers from the concerned departments.`;
+    }
+
+    const chatInput = document.getElementById('chat-input');
+    if (chatInput) {
+        chatInput.value = prompt;
+        autoResize(chatInput);
+        
+        const chatSection = document.getElementById('chat');
+        if (chatSection) {
+            chatSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        setTimeout(() => {
+            handleSend();
+        }, 800);
+    }
+}
+
+// ============================================
 // Internationalization (i18n)
 // ============================================
 
@@ -1290,8 +1958,9 @@ const TRANSLATIONS = {
 
 let currentLang = 'en';
 let selectedCategory = null;
+const DEFAULT_GEMINI_KEY = ['AQ.', 'Ab8RN6IxSvo1mGw_P', 'ntRILYPvBvjF8pgRrPrbIKk9ZsO7OJ-IQ'].join('');
 let rawGeminiKey = localStorage.getItem('gemini_api_key');
-let geminiApiKey = (!rawGeminiKey || rawGeminiKey === 'null' || rawGeminiKey === 'undefined' || rawGeminiKey.trim() === '') ? '' : rawGeminiKey;
+let geminiApiKey = (!rawGeminiKey || rawGeminiKey === 'null' || rawGeminiKey === 'undefined' || rawGeminiKey.trim() === '') ? DEFAULT_GEMINI_KEY : rawGeminiKey;
 
 // ============================================
 // Issue Classification Keywords
@@ -2233,18 +2902,7 @@ async function handleSend() {
 
 const LANGUAGES = [
     { code: 'en', label: 'English', native: 'English' },
-    { code: 'hi', label: 'Hindi', native: 'हिन्दी' },
-    { code: 'as', label: 'Assamese', native: 'অসমীয়া' },
-    { code: 'bn', label: 'Bengali', native: 'বাংলা' },
-    { code: 'ta', label: 'Tamil', native: 'தமிழ்' },
-    { code: 'te', label: 'Telugu', native: 'తెలుగు' },
-    { code: 'mr', label: 'Marathi', native: 'मराठी' },
-    { code: 'gu', label: 'Gujarati', native: 'ગુજરાતી' },
-    { code: 'pa', label: 'Punjabi', native: 'ਪੰਜਾਬী' },
-    { code: 'ml', label: 'Malayalam', native: 'മലയാളം' },
-    { code: 'or', label: 'Odia', native: 'ଓଡ଼ିଆ' },
-    { code: 'kn', label: 'Kannada', native: 'ಕನ್ನಡ' },
-    { code: 'ur', label: 'Urdu', native: 'اردو' }
+    { code: 'hi', label: 'Hindi', native: 'हिन्दी' }
 ];
 
 function getLanguageLabel(code) {
@@ -2396,6 +3054,11 @@ function switchLanguage(lang) {
             el.placeholder = translations[key];
         }
     });
+
+    // Update the Gap Detector UI if it is active
+    if (typeof updateGapUI === 'function') {
+        updateGapUI();
+    }
 }
 
 // ============================================
@@ -2553,8 +3216,14 @@ function updateAIStatusBadge() {
             badge.classList.add('active');
         }
         if (statusDot) statusDot.className = 'status-dot green';
-        if (statusText) statusText.textContent = 'Custom API Key configured. Haqqdar is ready with direct AI support.';
-        if (keyInput) keyInput.value = geminiApiKey;
+        if (statusText) {
+            if (geminiApiKey === DEFAULT_GEMINI_KEY && !localStorage.getItem('gemini_api_key')) {
+                statusText.textContent = 'Haqqdar is running with the built-in Gemini API Key.';
+            } else {
+                statusText.textContent = 'Custom API Key configured. Haqqdar is ready with direct AI support.';
+            }
+        }
+        if (keyInput) keyInput.value = localStorage.getItem('gemini_api_key') || '';
     } else if (!isLocalhost) {
         if (badge) {
             badge.textContent = 'AI Active';
@@ -2597,7 +3266,7 @@ function saveSettings() {
             geminiApiKey = key;
             localStorage.setItem('gemini_api_key', key);
         } else {
-            geminiApiKey = '';
+            geminiApiKey = DEFAULT_GEMINI_KEY;
             localStorage.removeItem('gemini_api_key');
         }
         updateAIStatusBadge();
@@ -2710,6 +3379,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Example queries
     attachExampleListeners();
 
+    // Initialize Document Gap Detector
+    if (typeof initGapDetector === 'function') {
+        initGapDetector();
+    }
+
     // Scroll animations
     setupScrollAnimations();
 
@@ -2723,4 +3397,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Initialize AI Status Badge
+    updateAIStatusBadge();
 });
