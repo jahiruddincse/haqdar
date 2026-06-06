@@ -2152,30 +2152,6 @@ async function handleSend() {
         }
     }, 500);
 }
-            // Couldn't classify — ask for more info
-            const isHindi = currentLang === 'hi';
-            let fallbackHTML = `<p>${isHindi
-                ? 'मैं आपकी समस्या समझने की कोशिश कर रहा हूँ। कृपया अधिक विस्तार से बताएं, या ऊपर किसी श्रेणी पर क्लिक करें:'
-                : "I'm trying to understand your issue. Could you provide more details, or select a category above:"
-            }</p>
-            <div class="example-queries" style="margin-top:12px;">
-                <button class="example-btn" data-query="Police refused to file my FIR">🚔 FIR Refused</button>
-                <button class="example-btn" data-query="I want to file RTI">📋 File RTI</button>
-                <button class="example-btn" data-query="My salary has not been paid for 3 months">💰 Wages Unpaid</button>
-                <button class="example-btn" data-query="My PM Kisan application was rejected">🏛️ Scheme Rejected</button>
-                <button class="example-btn" data-query="Ration shop refused to give me ration">🍚 Ration Denied</button>
-                <button class="example-btn" data-query="AFSPA related issue in Northeast">🏔️ Northeast</button>
-            </div>`;
-            if (geminiApiKey) {
-                fallbackHTML += `<div style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">⚠️ Note: AI query failed. Please check your API key or connectivity.</div>`;
-            }
-            addMessage(fallbackHTML, false);
-
-            // Re-attach example button listeners
-            setTimeout(attachExampleListeners, 100);
-        }
-    }, 500);
-}
 
 // ============================================
 // Language Switching
