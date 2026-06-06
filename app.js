@@ -2736,7 +2736,14 @@ Use this curated legal database information as the ground truth. Customise the l
     const systemInstruction = `You are Haqqdar AI (हक़दार AI) — India's AI Rights & Benefits Navigator.
 Analyze the user's input. Decide if it is a general greeting/conversation (like "hello", "hi", "how are you", "who are you", general chat) OR if it is a request/description of a legal issue/public service/welfare scheme problem.
 
-You must output a JSON object.
+You must output a JSON object. IMPORTANT: You MUST wrap the JSON output strictly inside a markdown json code block, like this:
+\`\`\`json
+{
+  ...
+}
+\`\`\`
+
+If you need to answer about live dates, scheme updates, portal links, or current events, use Google Search Grounding to find up-to-date real-time facts, then construct the JSON.
 
 If the user's query is conversational (e.g., greetings, general chat, asking who you are):
 Return a JSON object with these keys:
@@ -2782,9 +2789,11 @@ Analyze the user's query: "${userText}"`;
                 ]
             }
         ],
-        generationConfig: {
-            responseMimeType: "application/json"
-        }
+        tools: [
+            {
+                googleSearch: {}
+            }
+        ]
     };
 
     const response = await fetch(url, {
@@ -2802,8 +2811,12 @@ Analyze the user's query: "${userText}"`;
     const resJson = await response.json();
     const responseText = resJson.candidates[0].content.parts[0].text;
     
-    // Parse response text as JSON
-    return JSON.parse(responseText);
+    let jsonString = responseText;
+    const match = responseText.match(/```json\s*([\s\S]*?)\s*```/) || responseText.match(/```\s*([\s\S]*?)\s*```/);
+    if (match) {
+        jsonString = match[1];
+    }
+    return JSON.parse(jsonString.trim());
 }
 
 async function handleSend() {
