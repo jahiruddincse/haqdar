@@ -1,10 +1,10 @@
-# ⚖️ HaqDar (हक़दार) — AI-Powered Legal Rights Navigator
+# ⚖️ Haqqdar AI (হকদাৰ AI / हक़दार AI) — India's AI Rights & Benefits Navigator
 
 > **"No Indian should lose their rights because they didn't know how to fight back."**
 
 **When the system says NO, know what to say BACK.**
 
-HaqDar is an AI-powered legal escalation tool that converts a citizen's plain-language problem into a **ready-to-file legal document** with a **step-by-step bureaucratic escalation path** — in Hindi, English, or Assamese.
+Haqqdar AI is an AI-powered rights & benefits navigator that converts a citizen's plain-language problem into a **ready-to-file legal document** with a **step-by-step bureaucratic escalation path** — in Hindi, English, or Assamese.
 
 ## 🎯 The Problem
 
@@ -16,7 +16,7 @@ Every day in India, millions of people hear:
 
 These citizens have **legal rights** — they just don't know what to do when denied.
 
-## ✨ What Makes HaqDar Unique
+## ✨ What Makes Haqqdar AI Unique
 
 **No existing tool helps citizens AFTER the system says NO.**
 
@@ -26,7 +26,7 @@ These citizens have **legal rights** — they just don't know what to do when de
 | RTI portals | Let you file RTI | Don't help you **write** the RTI |
 | e-FIR portals | File FIR online | Don't help when police **refuse** |
 | Legal aid apps | Connect to lawyers | **Cost money**, slow |
-| **HaqDar** | **Generates ready-to-file legal documents + step-by-step escalation path** | — |
+| **Haqqdar AI** | **Generates ready-to-file legal documents + step-by-step escalation path** | — |
 
 ## 🔧 How It Works
 
@@ -96,7 +96,7 @@ Built for **Build for Good Bharat** — National Student Hackathon for Social Im
 
 ## ⚠️ Disclaimer
 
-HaqDar provides **legal information**, not legal advice. Always consult a qualified lawyer for specific legal matters.
+Haqqdar AI provides **legal information**, not legal advice. Always consult a qualified lawyer for specific legal matters.
 
 ## 📄 License
 

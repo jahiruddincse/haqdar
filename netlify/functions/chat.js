@@ -1,5 +1,6 @@
 // netlify/functions/chat.js
-// Serverless proxy for Gemini API to protect the API key in production.
+// Serverless proxy for Gemini API using standard Node.js https module for maximum compatibility.
+const https = require('https');
 
 exports.handler = async (event, context) => {
     // Only allow POST requests
@@ -16,40 +17,55 @@ exports.handler = async (event, context) => {
         return { 
             statusCode: 500, 
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ error: "Gemini API key not configured on the deployment server." }) 
+            body: JSON.stringify({ error: "Gemini API key not configured on the Netlify dashboard." }) 
         };
     }
 
     try {
-        const bodyData = JSON.parse(event.body);
+        const bodyData = event.body;
 
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        return new Promise((resolve, reject) => {
+            const options = {
+                hostname: 'generativelanguage.googleapis.com',
+                port: 443,
+                path: `/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
 
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bodyData)
+            const req = https.request(options, (res) => {
+                let data = '';
+
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+
+                res.on('end', () => {
+                    resolve({
+                        statusCode: res.statusCode,
+                        headers: { 
+                            "Content-Type": "application/json",
+                            "Access-Control-Allow-Origin": "*" 
+                        },
+                        body: data
+                    });
+                });
+            });
+
+            req.on('error', (e) => {
+                resolve({
+                    statusCode: 500,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ error: e.message })
+                });
+            });
+
+            req.write(bodyData);
+            req.end();
         });
 
-        if (!response.ok) {
-            const errText = await response.text();
-            return {
-                statusCode: response.status,
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ error: `Gemini API error: ${errText}` })
-            };
-        }
-
-        const data = await response.json();
-        return {
-            statusCode: 200,
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        };
     } catch (error) {
         return {
             statusCode: 500,

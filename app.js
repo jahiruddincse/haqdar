@@ -1,5 +1,5 @@
 /* ============================================
-   HaqDar — Application Logic
+   Haqqdar — Application Logic
    ============================================ */
 
 // ============================================
@@ -1068,9 +1068,9 @@ Yours faithfully,
 
 const TRANSLATIONS = {
     en: {
-        hero_badge: "AWAAZ Track — Build for Good Bharat",
-        hero_title: 'When the system says <span class="gradient-text">NO</span>,<br>know what to say <span class="gradient-text">BACK</span>.',
-        hero_subtitle: "AI-powered legal escalation tool that turns your problem into a ready-to-file legal document with a step-by-step escalation path — in your language.",
+        hero_badge: "National Citizen-Rights Infrastructure",
+        hero_title: 'When bureaucracy gets complicated, <span class="highlight-green">Haqqdar</span> shows the way.',
+        hero_subtitle: "Millions of Indians lose benefits, wages, justice, and opportunities simply because they do not know the next step. Haqqdar uses AI to identify your rights, generate legal documents, and guide you through every escalation path — in your language.",
         hero_cta: "Describe Your Problem",
         hero_cta2: "See How It Works",
         stat1: "Govt Schemes",
@@ -1102,26 +1102,48 @@ const TRANSLATIONS = {
         cat_ne_desc: "AFSPA, NRC, ILP, Tribal Land Rights",
         chat_tag: "YOUR ISSUE",
         chat_title: 'Tell us what <span class="gradient-text">happened</span>',
-        chat_welcome: "Namaste! I'm HaqDar — your legal rights assistant. Tell me what happened to you in your own words. For example:",
+        chat_welcome: "Namaste! I'm Haqqdar — your legal rights assistant. Tell me what happened to you in your own words. For example:",
         chat_placeholder: "Describe your problem here...",
-        chat_disclaimer: "HaqDar provides legal information, not legal advice. Always consult a lawyer for complex matters.",
+        chat_disclaimer: "Haqqdar provides legal information, not legal advice. Always consult a lawyer for complex matters.",
         ne_title: 'Special protections for the <span class="gradient-text">Northeast</span>',
         ne_desc: "Unique legal frameworks for Assam, Nagaland, Manipur, Meghalaya, Mizoram, Arunachal Pradesh, Tripura & Sikkim",
         help_tag: "EMERGENCY",
         help_title: 'Important <span class="gradient-text">Helplines</span>',
         footer_tagline: "Your Rights, Your Words. — Built for India, by India.",
-        footer_disc: "HaqDar provides legal information, not legal advice. Consult a qualified lawyer for specific legal matters.",
+        footer_disc: "Haqqdar provides legal information, not legal advice. Consult a qualified lawyer for specific legal matters.",
         settings_title: "⚙️ AI Settings",
-        settings_desc: "HaqDar uses Google Gemini AI to analyze your problems, identify legal rights, and generate tailored legal documents.",
+        settings_desc: "Haqqdar uses Google Gemini AI to analyze your problems, identify legal rights, and generate tailored legal documents.",
         settings_key_label: "Gemini API Key",
         settings_help_text: "Don't have a key? <a href=\"https://aistudio.google.com/\" target=\"_blank\">Get a free Gemini API Key here ↗</a>",
         settings_cancel: "Cancel",
-        settings_save: "Save Config"
+        settings_save: "Save Config",
+        nav_gap: "Gap Detector",
+        gap_tag: "PAPERWORK INTELLIGENCE",
+        gap_title: "Document Gap Detector",
+        gap_desc: "Bridge your paperwork gaps before submitting to avoid rejections. Check your profile, identify missing documents, and see resolution steps.",
+        gap_profile_title: "Select Citizen Profile",
+        gap_profile_desc: "Choose a pre-defined profile or type a custom one to check required welfare documentation.",
+        profile_flood: "🌾 Assam Flood Relief",
+        profile_tea: "☕ Tea Garden Worker",
+        profile_scholarship: "🎓 Low-Income Student",
+        profile_ration: "🍚 Ration Card (NFSA)",
+        profile_farmer: "🚜 PM-Kisan Scheme",
+        gap_custom_label: "Or enter custom situation / category:",
+        gap_detect_btn: "Analyze Gaps",
+        gap_footer_help: "Use Haqqdar AI to draft request letters or appeal documents for missing items.",
+        gap_ai_btn: "Draft Appeals for Missing Documents",
+        showcase_tag: "INTELLIGENCE PLATFORM",
+        showcase_title: 'Engineered to <span class="gradient-text">Bridge the Power Gap</span>',
+        showcase_desc: "Haqqdar is not just a chatbot. It is a digital public utility designed to help you navigate hostile bureaucratic systems.",
+        step5_title: "Deadline Tracking",
+        step5_desc: "Track response windows and calendar milestones automatically.",
+        step6_title: "Resolution Guidance",
+        step6_desc: "Follow-through templates until your case reaches a verdict."
     },
     hi: {
-        hero_badge: "आवाज़ ट्रैक — बिल्ड फॉर गुड भारत",
-        hero_title: 'जब सिस्टम कहे <span class="gradient-text">नहीं</span>,<br>तो जानो क्या कहना है <span class="gradient-text">वापस</span>।',
-        hero_subtitle: "AI-संचालित कानूनी उपकरण जो आपकी समस्या को तैयार कानूनी दस्तावेज़ और चरण-दर-चरण शिकायत पथ में बदलता है — आपकी भाषा में।",
+        hero_badge: "राष्ट्रीय नागरिक-अधिकार अवसंरचना",
+        hero_title: 'जब व्यवस्था जटिल हो जाए, <span class="highlight-green">Haqqdar</span> रास्ता दिखाता है।',
+        hero_subtitle: "लाखों भारतीय केवल इसलिए लाभ, मजदूरी, न्याय और अवसर खो देते हैं क्योंकि वे अगला कदम नहीं जानते हैं। Haqqdar आपकी भाषा में — आपके अधिकारों की पहचान करने, कानूनी दस्तावेज़ तैयार करने और हर एस्केलेशन पथ पर आपका मार्गदर्शन करने के लिए AI का उपयोग करता है।",
         hero_cta: "अपनी समस्या बताएं",
         hero_cta2: "कैसे काम करता है देखें",
         stat1: "सरकारी योजनाएं",
@@ -1167,12 +1189,34 @@ const TRANSLATIONS = {
         settings_key_label: "Gemini API Key",
         settings_help_text: "Key नहीं है? <a href=\"https://aistudio.google.com/\" target=\"_blank\">यहाँ मुफ़्त Gemini API Key प्राप्त करें ↗</a>",
         settings_cancel: "रद्द करें",
-        settings_save: "सेव करें"
+        settings_save: "सेव करें",
+        nav_gap: "दस्तावेज़ जाँच",
+        gap_tag: "कागजी कार्रवाई इंटेलिजेंस",
+        gap_title: "दस्तावेज़ गैप डिटेक्टर",
+        gap_desc: "अस्वीकृति से बचने के लिए सबमिट करने से पहले अपनी कागजी कार्रवाई के अंतर को दूर करें। अपना प्रोफ़ाइल जांचें, लापता दस्तावेज़ों की पहचान करें और समाधान कदम देखें।",
+        gap_profile_title: "नागरिक प्रोफ़ाइल चुनें",
+        gap_profile_desc: "आवश्यक कल्याणकारी दस्तावेज़ों की जांच के लिए एक पूर्व-निर्धारित प्रोफ़ाइल चुनें या एक कस्टम टाइप करें।",
+        profile_flood: "🌾 असम बाढ़ राहत",
+        profile_tea: "☕ चाय बागान श्रमिक",
+        profile_scholarship: "🎓 कम आय वाले छात्र",
+        profile_ration: "🍚 राशन कार्ड (NFSA)",
+        profile_farmer: "🚜 पीएम-किसान योजना",
+        gap_custom_label: "या कस्टम स्थिति / श्रेणी दर्ज करें:",
+        gap_detect_btn: "कमियाँ खोजें",
+        gap_footer_help: "लापता वस्तुओं के लिए अनुरोध पत्र या अपील दस्तावेज़ तैयार करने के लिए Haqqdar AI का उपयोग करें।",
+        gap_ai_btn: "लापता दस्तावेज़ों के लिए अपील ड्राफ्ट करें",
+        showcase_tag: "इंटेलिजेंस प्लेटफ़ॉर्म",
+        showcase_title: 'नागरिकों को <span class="gradient-text">सशक्त बनाने के लिए</span> तैयार',
+        showcase_desc: "Haqqdar केवल एक चैटबॉट नहीं है। यह एक डिजिटल सार्वजनिक उपयोगिता है जिसे जटिल सरकारी प्रणालियों को नेविगेट करने में आपकी सहायता के लिए डिज़ाइन किया गया है।",
+        step5_title: "समय सीमा ट्रैकिंग",
+        step5_desc: "स्वचालित रूप से उत्तर खिड़कियों और कैलेंडर मील के पत्थर को ट्रैक करें।",
+        step6_title: "समाधान मार्गदर्शन",
+        step6_desc: "जब तक आपके मामले का फैसला नहीं हो जाता, तब तक अनुवर्ती टेम्प्लेट का पालन करें।"
     },
     as: {
-        hero_badge: "আৱাজ ট্ৰেক — বিল্ড ফৰ গুড ভাৰত",
-        hero_title: 'যেতিয়া ব্যৱস্থাই কয় <span class="gradient-text">নহয়</span>,<br>জানক কি ক\'ব <span class="gradient-text">উত্তৰত</span>।',
-        hero_subtitle: "AI-চালিত আইনী সঁজুলি যিয়ে আপোনাৰ সমস্যাক দাখিল কৰিবলৈ সাজু আইনী নথিপত্ৰলৈ ৰূপান্তৰ কৰে — আপোনাৰ ভাষাত।",
+        hero_badge: "ৰাষ্ট্ৰীয় নাগৰিক-অধিকাৰ আন্তঃগাঁথনি",
+        hero_title: 'যেতিয়া চৰকাৰী ব্যৱস্থা জটিল হৈ পৰে, <span class="highlight-green">Haqqdar-এ</span> পথ দেখুৱায়।',
+        hero_subtitle: "লাখ লাখ ভাৰতীয়ই কেৱল পৰৱৰ্তী পদক্ষেপটো নজনাৰ বাবেই সুবিধা, মজুৰি, ন্যায় আৰু সুযোগ হেৰুৱাব লগা হয়। Haqqdar-এ AI ব্যৱহাৰ কৰি আপোনাৰ অধিকাৰ চিনাক্ত কৰে, আইনী নথিপত্ৰ প্ৰস্তুত কৰে আৰু প্ৰতিটো এস্কেলেচন পথৰ জৰিয়তে আপোনাক নিৰ্দেশনা দিয়ে — আপোনাৰ নিজৰ ভাষাত।",
         hero_cta: "আপোনাৰ সমস্যা বৰ্ণনা কৰক",
         hero_cta2: "কেনেকৈ কাম কৰে চাওক",
         stat1: "চৰকাৰী আঁচনি",
@@ -1187,7 +1231,7 @@ const TRANSLATIONS = {
         step3_title: "আইনী নথিপত্ৰ পাওক",
         step3_desc: "স্বয়ংক্ৰিয় অভিযোগ, RTI, বা এস্কেলেচন পত্ৰ — সঠিক আইনী ফৰ্মেটত।",
         step4_title: "এস্কেলেচন লেডাৰ",
-        step4_desc: "যোগাযোগ, পৰ্টেল লিংক আৰু সময়সীমাৰ সৈতে পদক্ষেপ-দৰ-পদক্ষেপ পথ।",
+        step4_desc: "যোগাযোগ, পৰ্টেল লিংক আৰু সময়সীমাৰ সৈते পদক্ষেপ-দৰ-পদক্ষেপ পথ।",
         cat_tag: "আমি কি সামৰি লওঁ",
         cat_title: 'আপোনাৰ <span class="gradient-text">সমস্যা</span> বাছক',
         cat_fir: "FIR প্ৰত্যাখ্যান",
@@ -1206,12 +1250,41 @@ const TRANSLATIONS = {
         chat_title: 'কওক কি <span class="gradient-text">হৈছিল</span>',
         chat_welcome: "নমস্কাৰ! মই হকদাৰ — আপোনাৰ আইনী অধিকাৰ সহায়ক। আপোনাৰ নিজৰ ভাষাত কওক কি হৈছিল।",
         chat_placeholder: "আপোনাৰ সমস্যা ইয়াত লিখক...",
+        chat_disclaimer: "হকদাৰে আইনী তথ্য প্ৰদান কৰে, আইনী পৰামৰ্শ নহয়। জটিল বিষয়ৰ বাবে সদায় উকীলৰ সৈতে পৰামৰ্শ কৰিব।",
+        ne_title: '<span class="gradient-text">উত্তৰ-পূব</span>ৰ বাবে বিশেষ সুৰক্ষা',
+        ne_desc: "অসম, নাগালেণ্ড, মণিপুৰ, মেঘালয়, মিজোৰাম, অৰুণাচল প্ৰদেশ, ত্ৰিপুৰা আৰু ছিকিমৰ বাবে একক আইনী গাঁথনি",
+        help_tag: "জৰুৰীকালীন",
+        help_title: 'গুৰুত্বপূৰ্ণ <span class="gradient-text">হেল্পলাইন</span>',
+        footer_tagline: "আপোনাৰ অধিকাৰ, আপোনাৰ শব্দ। — ভাৰতৰ বাবে, ভাৰতৰ দ্বাৰা।",
+        footer_disc: "হকদাৰে আইনী তথ্য প্ৰদান কৰে, আইনী পৰামৰ্শ নহয়। জটিল বিষয়ৰ বাবে সদায় উকীলৰ সৈতে পৰামৰ্শ কৰিব।",
         settings_title: "⚙️ AI ছেটিংছ",
         settings_desc: "হকদাৰে আপোনাৰ সমস্যাসমূহ বিশ্লেষণ কৰিবলৈ, আইনী অধিকাৰ চিনাক্ত কৰিবলৈ আৰু প্ৰয়োজনীয় আইনী নথিপত্ৰ প্ৰস্তুত কৰিবলৈ Google Gemini AI ব্যৱহাৰ কৰে।",
         settings_key_label: "Gemini API কি (API Key)",
         settings_help_text: "আপোনাৰ কি (Key) নাইনে? <a href=\"https://aistudio.google.com/\" target=\"_blank\">ইয়াত এটা বিনামূলীয়া Gemini API কি লাভ কৰক ↗</a>",
         settings_cancel: "বাতিল কৰক",
-        settings_save: "সংৰক্ষণ কৰক"
+        settings_save: "সংৰক্ষণ কৰক",
+        nav_gap: "নথিপত্ৰ পৰীক্ষক",
+        gap_tag: "কাগজ-পত্ৰৰ বুদ্ধিমত্তা",
+        gap_title: "নথিপত্ৰৰ ব্যৱধান চিনাক্তকাৰী",
+        gap_desc: "আবেদন নাকচ হোৱাৰ পৰা বাচিবলৈ জমা দিয়াৰ পূৰ্বে আপোনাৰ নথিপত্ৰৰ অভাৱসমূহ দূৰ কৰক। আপোনাৰ প্ৰ’ফাইল পৰীক্ষা কৰক, হেৰুৱা নথিসমূহ চিনাক্ত কৰক আৰু সমাধানৰ পদক্ষেপসমূহ চাওক।",
+        gap_profile_title: "নাগৰিক প্ৰ’ফাইল বাছক",
+        gap_profile_desc: "প্ৰয়োজনীয় কল্যাণমুখী নথিপত্ৰ পৰীক্ষা কৰিবলৈ এটা পূৰ্ব-নিৰ্ধাৰিত প্ৰ’ফাইল বাছক বা এটা নিজাকৈ টাইপ কৰক।",
+        profile_flood: "🌾 অসম বান সাহায্য",
+        profile_tea: "☕ চাহ বাগিচাৰ শ্ৰমিক",
+        profile_scholarship: "🎓 কম আয়ৰ শিক্ষাৰ্থী",
+        profile_ration: "🍚 ৰেচন কাৰ্ড (NFSA)",
+        profile_farmer: "🚜 পি.এম-কৃষক আঁচনি",
+        gap_custom_label: "অথবা নিজা পৰিস্থিতি / শ্ৰেণী লিখক:",
+        gap_detect_btn: "ব্যৱধান বিশ্লেষণ কৰক",
+        gap_footer_help: "হেৰুৱা নথিসমূহৰ বাবে অনুৰোধ পত্ৰ বা আপীল পত্ৰ প্ৰস্তুত কৰিবলৈ Haqqdar AI ব্যৱহাৰ কৰক।",
+        gap_ai_btn: "হেৰুৱা নথিসমূহৰ বাবে আপীল খচৰা কৰক",
+        showcase_tag: "বুদ্ধিমত্তা মঞ্চ",
+        showcase_title: 'নাগৰিকক <span class="gradient-text">সবল কৰিবলৈ</span> প্ৰস্তুত',
+        showcase_desc: "Haqqdar কেৱল এটা চ্যাটবট নহয়। ই এটা ডিজিটেল ৰাজহুৱা ব্যৱস্থা যিটো জটিল চৰকাৰী প্ৰক্ৰিয়াসমূহ পাৰ হ’বলৈ আপোনাক সহায় কৰিবলৈ ডিজাইন কৰা হৈছে।",
+        step5_title: "সময়সীমা ট্ৰেকিং",
+        step5_desc: "স্বয়ংক্ৰিয়ভাৱে সঁহাৰিৰ সময়সীমা আৰু কেলেণ্ডাৰ মাইলৰ খুঁটি ট্ৰেক কৰক।",
+        step6_title: "সমাধান নিৰ্দেশনা",
+        step6_desc: "আপোনাৰ গোচৰৰ মীমাংসা নোহোৱালৈকে অনুসৰণমূলক টেমপ্লেট ব্যৱহাৰ কৰক।"
     }
 };
 
@@ -1448,7 +1521,7 @@ function downloadDocument(category) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `HaqDar_${category}_${currentLang}.txt`;
+    a.download = `Haqqdar_${category}_${currentLang}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1465,7 +1538,7 @@ function isCaseTracked(category) {
 }
 
 function getActiveCases() {
-    const data = localStorage.getItem('haqdar_active_cases');
+    const data = localStorage.getItem('haqqdar_active_cases');
     try {
         return data ? JSON.parse(data) : [];
     } catch (e) {
@@ -1474,7 +1547,7 @@ function getActiveCases() {
 }
 
 function saveCases(cases) {
-    localStorage.setItem('haqdar_active_cases', JSON.stringify(cases));
+    localStorage.setItem('haqqdar_active_cases', JSON.stringify(cases));
 }
 
 function trackCase(category) {
@@ -1991,7 +2064,7 @@ Use this curated legal database information as the ground truth. Customise the l
         }
     }
 
-    const systemInstruction = `You are HaqDar (हक़दार) — an AI-powered legal rights assistant for India.
+    const systemInstruction = `You are Haqqdar AI (हक़दार AI / হকদাৰ AI) — India's AI Rights & Benefits Navigator.
 The user has described a problem. Your job is to analyze their problem, identify their legal rights under Indian law, including the Constitution of India (Fundamental Rights, Articles, and Schedules) and specific acts (such as BNS 2023, BNSS 2023, BSA 2023, RTI Act 2005, NFSA 2013, Code on Wages 2019, Forest Rights Act 2006, and regional/state-specific regulations).
 
 You must output a JSON object containing the following keys (and nothing else):
@@ -2480,7 +2553,7 @@ function updateAIStatusBadge() {
             badge.classList.add('active');
         }
         if (statusDot) statusDot.className = 'status-dot green';
-        if (statusText) statusText.textContent = 'Custom API Key configured. HaqDar is ready with direct AI support.';
+        if (statusText) statusText.textContent = 'Custom API Key configured. Haqqdar is ready with direct AI support.';
         if (keyInput) keyInput.value = geminiApiKey;
     } else if (!isLocalhost) {
         if (badge) {
@@ -2488,7 +2561,7 @@ function updateAIStatusBadge() {
             badge.classList.add('active');
         }
         if (statusDot) statusDot.className = 'status-dot green';
-        if (statusText) statusText.textContent = 'HaqDar is running with production serverless AI support.';
+        if (statusText) statusText.textContent = 'Haqqdar is running with production serverless AI support.';
         if (keyInput) keyInput.value = '';
     } else {
         if (badge) {

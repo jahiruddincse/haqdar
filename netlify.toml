@@ -1,5 +1,5 @@
 # netlify.toml
-# Netlify configuration file for HaqDar deployment.
+# Netlify configuration file for Haqqdar deployment.
 
 [build]
   publish = "."
